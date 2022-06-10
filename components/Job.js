@@ -9,6 +9,7 @@ const Job = ({ job }) => {
                 <h4 className='inline'>Posted by</h4>
                 <div className='ml-3 -mt-6 inline'>
                     <span>
+                        {/* Link has the advantage of loading client-side code faster */}
                         <Link href={`/job/${job.id}`}>
                             <a className='text-xl font-bold underline'>{job.title}</a>
                         </Link>

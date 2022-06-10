@@ -1,5 +1,6 @@
 import { getJob } from 'lib/data'
 import prisma from 'lib/prisma'
+import Link from 'next/link'
 
 export default function Job({ job }) {
     return (
