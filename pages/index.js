@@ -3,6 +3,7 @@ import prisma from 'lib/prisma'
 import { useSession, getSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { getJobs, getUser } from 'lib/data.js'
+import Link from 'next/link'
 
 export default function Home({ jobs, user }) {
   const { data: session } = useSession()
@@ -37,11 +38,13 @@ export default function Home({ jobs, user }) {
           </p>
           {user.company ? (
             <>
-              <button
-                className='border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '
-              >
-                click here to post a new job
-              </button>
+              <Link href={`/new`}>
+                <button
+                  className='border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '
+                >
+                  click here to post a new job
+                </button>
+              </Link>
               <button
                 className='ml-5 border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '
               >
@@ -72,6 +75,12 @@ export async function getServerSideProps(context) {
 
   let jobs = await getJobs(prisma, context)
   jobs = JSON.parse(JSON.stringify(jobs))
+
+  if (!session) {
+    return {
+      props: { jobs },
+    }
+  }
 
   let user = await getUser(session.user.id, prisma, context)
   user = JSON.parse(JSON.stringify(user))
