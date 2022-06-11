@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function New() {
     const [description, setDescription] = useState('')
@@ -7,11 +8,30 @@ export default function New() {
     const [salary, setSalary] = useState('')
     const [location, setLocation] = useState('')
     const { data: session } = useSession()
+    const router = useRouter()
 
     if (!session || !session.user) return null
 
     return (
         <form
+            onSubmit={async (e) => {
+                e.preventDefault()
+
+                await fetch('/api/job', {
+                    body: JSON.stringify({
+                        title,
+                        description,
+                        location,
+                        salary,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'POST',
+                })
+
+                router.push('/dashboard')
+            }}
         >
             <div className='flex flex-col w-1/2 mx-auto'>
                 <h2 className='mt-10 mb-10 text-4xl font-bold'>Post a new job!</h2>
