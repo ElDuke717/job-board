@@ -52,13 +52,13 @@ export default function Home({ jobs, user }) {
               </Link>
             </>
           ) : (
-            <>
-              <button
-                className='ml-5 border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '
-              >
-                see all the jobs you applied to
-              </button>
-            </>
+            <div className='flex justify-center'>
+              <Link href={`/dashboard`}>
+                <button className='ml-5 border px-8 py-2 mt-5 font-bold rounded-full bg-black text-white border-black '>
+                  see all the jobs you applied to
+                </button>
+              </Link>
+            </div>
           )}
         </>
       )}
