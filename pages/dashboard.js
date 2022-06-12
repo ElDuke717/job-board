@@ -1,7 +1,7 @@
 import { getSession, useSession } from 'next-auth/react'
 import prisma from 'lib/prisma'
 import { getJobsPosted, getUser, getApplications } from 'lib/data.js'
-import Job from 'components/Jobs'
+import Job from 'components/Job'
 import Link from 'next/link'
 
 export default function Dashboard({ jobs, user, applications }) {
@@ -108,3 +108,4 @@ export async function getServerSideProps(context) {
         },
     }
 }
+
