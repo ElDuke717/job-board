@@ -24,7 +24,7 @@ export default function Dashboard({ jobs, user, applications }) {
             </div>
 
             {user.company ? (
-                <Jobs jobs={jobs} isDashboard={true} />
+                <Jobs jobs={jobs} job={job} />
             ) : (
                 <>
                     {applications.map((application) => {
